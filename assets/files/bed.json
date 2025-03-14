@@ -1,0 +1,40 @@
+{
+  "Beds": [
+    {
+      "id": 1,
+      "name": "Arihant Hospital & Research Centre",
+      "type": "ICU",
+      "number": "324"
+    },
+    {
+      "id": 2,
+      "name": "Medicare Hospital & Research Centre",
+      "type": "Semi Private",
+      "number": "411"
+    },
+    {
+      "id": 3,
+      "name": "Apollo Hospital",
+      "type": "Private",
+      "number": "212"
+    },
+    {
+      "id": 4,
+      "name": "Apple Hospital",
+      "type": "Semi Private",
+      "number": "344"
+    },
+    {
+      "id": 5,
+      "name": "Index Medical College Hospital & Research Centre",
+      "type": "General",
+      "number": "504"
+    },
+    {
+      "id": 6,
+      "name": "Medanta Super Speciality Hospital",
+      "type": "Neonatal",
+      "number": "067"
+    }
+  ]
+}
