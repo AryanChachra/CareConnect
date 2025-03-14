@@ -1,4 +1,4 @@
-# CareConnect <img src="assets/images/CareConnect.png" width="100" height="40">
+# CareConnect <img src="assets/images/CareConnect.png" width="200" height="100">
 
 ## 📌 About the Project
 **CareConnect** is a mobile application developed using **Flutter** that helps users book hospital beds and check availability in real time. The app is part of a larger ecosystem, including a **React-based web frontend** and a **Django backend**.
