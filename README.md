@@ -1,4 +1,4 @@
-# CareConnect <img src="assets/images/CareConnect.png" width="40" height="40">
+# CareConnect <img src="assets/images/CareConnect.png" width="100" height="40">
 
 ## 📌 About the Project
 **CareConnect** is a mobile application developed using **Flutter** that helps users book hospital beds and check availability in real time. The app is part of a larger ecosystem, including a **React-based web frontend** and a **Django backend**.
@@ -47,15 +47,24 @@ The platform is designed to bridge the gap between hospitals and patients by **d
   ```
 
 ## 📸 Screenshots
-![Landing Page](assets/screenshots/landing_page.png)
-![Sign Up Page](assets/screenshots/sign_up.png)
-![Email Verification Page](assets/screenshots/email_verification.png)
-![Sign In Page](assets/screenshots/sign_in.png)
-![Home Screen](assets/screenshots/home_page.png)
-![Page Drawer](assets/screenshots/drawer.png)
-![Hospital List Page](assets/screenshots/hospital_details.png)
-![Appointment Page](assets/screenshots/appointment_booking.png)
-![Doctor Dashboard Page](assets/screenshots/doctor_dashboard.png)
+<table>
+  <tr>
+    <td><img src="assets/screenshots/landing_page.png" alt="Landing Page" width="250"/></td>
+    <td><img src="assets/screenshots/sign_up.png" alt="Sign Up Page" width="250"/></td>
+    <td><img src="assets/screenshots/email_verification.png" alt="Email Verification Page" width="250"/></td>
+  </tr>
+  <tr>
+    <td><img src="assets/screenshots/sign_in.png" alt="Sign In Page" width="250"/></td>
+    <td><img src="assets/screenshots/home_page.png" alt="Home Screen" width="250"/></td>
+    <td><img src="assets/screenshots/drawer.png" alt="Page Drawer" width="250"/></td>
+  </tr>
+  <tr>
+    <td><img src="assets/screenshots/hospital_details.png" alt="Hospital List Page" width="250"/></td>
+    <td><img src="assets/screenshots/appointment_booking.png" alt="Appointment Page" width="250"/></td>
+    <td><img src="assets/screenshots/doctor_dashboard.png" alt="Doctor Dashboard Page" width="250"/></td>
+  </tr>
+</table>
+
 
 
 ## 🎯 Contributors
