@@ -136,7 +136,7 @@ class BedItem extends StatelessWidget {
                   Padding(
                     padding: const EdgeInsets.all(16.0),
                     child: Text(
-                      "Doctor's Name: ${catalog.fullName}",
+                      "Name: ${catalog.fullName}",
                       style: TextStyle(
                         color: MyTheme.blueColor,
                         fontSize: 18,

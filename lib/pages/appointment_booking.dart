@@ -98,8 +98,6 @@ class AppointmentViewingState extends State<AppointmentViewing> {
                       style: TextStyle(fontSize: 18)),
                   Text("Experience: ${doctorDetails!['experience']} years",
                       style: TextStyle(fontSize: 18)),
-                  Text("Location: ${doctorDetails!['city']}",
-                      style: TextStyle(fontSize: 18)),
                 ],
               ),
             ),
