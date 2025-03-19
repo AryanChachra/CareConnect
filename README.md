@@ -31,9 +31,9 @@ The platform is designed to bridge the gap between hospitals and patients by **d
 - 📅 **Appointment Booking System**
 - 📹 **Video Consultation with Doctors**
 - 🔎 **Doctor Listings & Specializations**
-- 🔐 **Secure User Authentication** (Firebase Auth)
+- 🔐 **Secure User Authentication** 
 - 📍 **Hospital & Doctor Location Mapping**
-- 📊 **Dashboard for Healthcare Insights**
+- 📊 **Dashboard for Healthcare Providers**
 
 ## 🛠️ Tech Stack
 ### **Frontend:**
