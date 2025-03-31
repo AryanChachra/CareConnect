@@ -55,7 +55,7 @@ dev_dependencies:
 flutter_icons:
   android: true
   ios: true
-  image_path: "assets/images/CareConnect.png"
+  image_path: "assets/images/AppLogo.png"
 
 
 # For information on the generic Dart part of this file, see the
