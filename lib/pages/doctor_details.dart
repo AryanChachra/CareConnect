@@ -28,7 +28,9 @@ class _DoctorDetailsState extends State<DoctorDetails> {
   loadData() async {
     try {
       var doctorData = await apiService.getData("Doctorlist");
-      DoctorModel.items = List.from(doctorData['Data']).map((item) => Item.fromMap(item)).toList();
+      DoctorModel.items = List.from(doctorData['Data'])
+          .map((item) => Item.fromMap(item))
+          .toList();
     } catch (e) {
       setState(() {
         isLoading = true;
@@ -57,9 +59,11 @@ class _DoctorDetailsState extends State<DoctorDetails> {
                   child: CircularProgressIndicator(),
                 )
               else
-              // Center(
-              // child: Text("No beds found for this hospital."),
-                Expanded(child: BedList(),),
+                // Center(
+                // child: Text("No beds found for this hospital."),
+                Expanded(
+                  child: BedList(),
+                ),
               // )
             ],
           ),
@@ -109,7 +113,6 @@ class BedList extends StatelessWidget {
 }
 
 class BedItem extends StatelessWidget {
-  // final List<Item> beds;
   final Item catalog;
   const BedItem({super.key, required this.catalog});
 
@@ -123,66 +126,55 @@ class BedItem extends StatelessWidget {
       margin: EdgeInsets.symmetric(vertical: 10),
       child: Padding(
         padding: const EdgeInsets.all(16.0),
-        child: Row(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            SizedBox(
-              width: 20,
+            Text(
+              "Name: ${catalog.fullName}",
+              style: TextStyle(
+                color: MyTheme.blueColor,
+                fontSize: 18,
+                fontWeight: FontWeight.bold,
+              ),
             ),
-            Expanded(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.all(16.0),
-                    child: Text(
-                      "Name: ${catalog.fullName}",
-                      style: TextStyle(
-                        color: MyTheme.blueColor,
-                        fontSize: 18,
-                        fontWeight: FontWeight.bold,
+            Row(
+              crossAxisAlignment: CrossAxisAlignment.end,
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                Expanded(
+                  child: Text(
+                      "Specialization: ${catalog.specialization}\nExperience: ${catalog.yearOfExperience} years\nLocation: ${catalog.city}"),
+                ),
+                SizedBox(height: 10,),
+                Flexible(
+                  child: ElevatedButton(
+                    onPressed: () {
+                      Navigator.pushNamed(
+                        context,
+                        MyRoutes.appointmentRoute,
+                        arguments: {
+                          "id": catalog.id,
+                          "full_name": catalog.fullName,
+                          "Specialization": catalog.specialization,
+                          "experience": catalog.yearOfExperience,
+                          "hospital_name": catalog.city,
+                        },
+                      );
+                    },
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: MyTheme.blueColor, // For button background
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(20),
                       ),
                     ),
+                    child: Text(
+                      "View Details",
+                      style: TextStyle(color: Colors.white),
+                    ),
                   ),
-                  SizedBox(
-                    height: 5,
-                  ),
-                  // Text(
-                  //   "Specialization: ${catalog.Specialization}\n Experience: ${catalog.Year_of_experience} years",
-                  //   style: Theme.of(context).textTheme.bodySmall,
-                  // ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text("Specialization: ${catalog.specialization}\nExperience: ${catalog.yearOfExperience} years\nLocation: ${catalog.city}"),
-                      ElevatedButton(
-                        onPressed: () {
-                          Navigator.pushNamed(context, MyRoutes.appointmentRoute,arguments: {
-                            "id": catalog.id,
-                            "full_name": catalog.fullName,
-                            "Specialization": catalog.specialization,
-                            "experience": catalog.yearOfExperience,
-                            "hospital_name": catalog.city,
-                          },
-                          );
-                        },
-
-                        style: ElevatedButton.styleFrom(
-                          backgroundColor:
-                          MyTheme.blueColor, // For button background
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(20),
-                          ),
-                        ),
-                        child: Text(
-                          "View Details",
-                          style: TextStyle(color: Colors.white),
-                        ),
-                      ),
-                    ],
-                  ),
-                ],
-              ),
+                ),
+              ],
             ),
           ],
         ),

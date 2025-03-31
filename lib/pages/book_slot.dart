@@ -36,12 +36,10 @@ class _AppointmentBookingState extends State<AppointmentBooking> {
     }
   }
 
-
-
   Future<void> _requestforappointment() async {
     if (!_formKey.currentState!.validate()) return;
     String? userName = await _storage.read(key: 'userName');
-    String? id = await _storage.read(key: 'UserId');
+    String? id = await _storage.read(key: 'userId');
     int userId = int.parse(id!);
     final data = {
       "user_id": userId,

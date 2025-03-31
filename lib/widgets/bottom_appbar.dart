@@ -19,7 +19,7 @@ class CustomBottomAppBar extends StatelessWidget {
           }, icon: Icon(Icons.bed,),),
           IconButton(onPressed: (){
             Navigator.pushNamed(context, MyRoutes.doctorRoute);
-          }, icon: Icon(CupertinoIcons.videocam_fill,color: Colors.red),),
+          }, icon: Icon(CupertinoIcons.videocam_fill,),),
           IconButton(onPressed: (){
             Navigator.pushNamed(context, MyRoutes.contactRoute);
           }, icon: Icon(Icons.email),),

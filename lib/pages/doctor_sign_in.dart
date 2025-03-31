@@ -18,6 +18,7 @@ class _DoctorSignInState extends State<DoctorSignIn> {
   final _storage = FlutterSecureStorage();
   final ApiService apiService = ApiService();
   bool isLoggedIn = false;
+  bool isLoading = false;
   String? token;
 
   @override
@@ -37,12 +38,18 @@ class _DoctorSignInState extends State<DoctorSignIn> {
   }
 
   Future<void> _login() async {
+    setState(() {
+      isLoading = true;
+    });
     final email = _usernameController.text;
     final password = _passwordController.text;
     if (email.isEmpty || password.isEmpty) {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(content: Text('Please enter both Email and Password')),
       );
+      setState(() {
+        isLoading = false;
+      });
       return;
     }
     final data = {"username": email, "passcode": password};
@@ -59,6 +66,7 @@ class _DoctorSignInState extends State<DoctorSignIn> {
       setState(() {
         isLoggedIn = true;
         token = authToken;
+        isLoading = false;
       });
       ScaffoldMessenger.of(context)
           .showSnackBar(SnackBar(content: Text('Login Successful')));
@@ -74,6 +82,9 @@ class _DoctorSignInState extends State<DoctorSignIn> {
         await _storage.write(key: 'otp', value: otp.toString());
         await _storage.write(key: 'token', value: authToken);
         await _storage.write(key: 'userType', value: 'Doctor');
+        setState(() {
+          isLoading = false;
+        });
         showDialog(
           context: context,
           builder: (context) => AlertDialog(
@@ -91,6 +102,9 @@ class _DoctorSignInState extends State<DoctorSignIn> {
         );
       }
     } else {
+      setState(() {
+        isLoading = false;
+      });
       ScaffoldMessenger.of(context)
           .showSnackBar(SnackBar(content: Text(message)));
     }
@@ -102,56 +116,91 @@ class _DoctorSignInState extends State<DoctorSignIn> {
       appBar: CustomAppBar(),
       body: Padding(
         padding: EdgeInsets.all(16.0),
-        child: Form(
-          child: ListView(
-            children: [
-              TextFormField(
-                controller: _usernameController,
-                decoration: InputDecoration(labelText: "Email"),
-                keyboardType: TextInputType.text,
-                // validator: (value) {
-                //   if (value == null || value.isEmpty) {
-                //     return 'Email is required!';
-                //   }
-                // },
+        child: Center(
+          child: Container(
+            height: 400,
+            width: 400,
+            child: Card(
+              shadowColor: MyTheme.blueColor,
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(15),
               ),
-              TextFormField(
-                controller: _passwordController,
-                decoration: InputDecoration(labelText: "Password"),
-                keyboardType: TextInputType.text,
-                obscureText: true,
-                // validator: (value) {
-                //   if (value == null || value.isEmpty) {
-                //     return 'Email is required!';
-                //   }
-                // },
-              ),
-              SizedBox(
-                height: 16,
-              ),
-              // ElevatedButton(onPressed: _login, child: Text('Login')),
-              isLoggedIn
-                  ? Center(child: CircularProgressIndicator())
-                  : ElevatedButton(
-                      onPressed: _login,
-                      style: ElevatedButton.styleFrom(
-                          backgroundColor: MyTheme.blueColor),
-                      child: Text(
-                        "Login",
-                        style: TextStyle(
-                          color: Colors.white,
+              elevation: 4,
+              child: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Form(
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      TextFormField(
+                        controller: _usernameController,
+                        decoration: InputDecoration(
+                          labelText: "Email",
+                          border: OutlineInputBorder( borderRadius: BorderRadius.circular(15),),
+                          enabledBorder: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(15),
+                            borderSide: BorderSide(
+                                color: MyTheme.blueColor, width: 1.5),
+                          ),
+                          focusedBorder: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(15),
+                            borderSide: BorderSide(
+                                color: MyTheme.blueColor, width: 2.0),
+                          ),
                         ),
+                        keyboardType: TextInputType.text,
                       ),
-                    ),
-              SizedBox(
-                height: 16.0,
+                      SizedBox(
+                        height: 10,
+                      ),
+                      TextFormField(
+                        controller: _passwordController,
+                        decoration: InputDecoration(
+                          labelText: "Password",
+                          border: OutlineInputBorder(borderRadius: BorderRadius.circular(15),),
+                          enabledBorder: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(15),
+                            borderSide: BorderSide(
+                                color: MyTheme.blueColor, width: 1.5),
+                          ),
+                          focusedBorder: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(15),
+                            borderSide: BorderSide(
+                                color: MyTheme.blueColor, width: 2.0),
+                          ),
+                        ),
+                        keyboardType: TextInputType.text,
+                        obscureText: true,
+                      ),
+                      SizedBox(
+                        height: 16,
+                      ),
+                      isLoading
+                          ? Center(child: CircularProgressIndicator())
+                          : ElevatedButton(
+                              onPressed: _login,
+                              style: ElevatedButton.styleFrom(
+                                  backgroundColor: MyTheme.blueColor),
+                              child: Text(
+                                "Login",
+                                style: TextStyle(
+                                  color: Colors.white,
+                                ),
+                              ),
+                            ),
+                      SizedBox(
+                        height: 16.0,
+                      ),
+                      TextButton(
+                          onPressed: () {
+                            Navigator.pushNamed(context, MyRoutes.checkuserRoute);
+                          },
+                          child: Text('Don\'t have an account?')),
+                    ],
+                  ),
+                ),
               ),
-              TextButton(
-                  onPressed: () {
-                    Navigator.pushNamed(context, MyRoutes.checkuserRoute);
-                  },
-                  child: Text('Don\'t have an account?')),
-            ],
+            ),
           ),
         ),
       ),

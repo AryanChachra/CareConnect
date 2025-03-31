@@ -13,7 +13,7 @@ class Item {
   final String appointmentDate;
   final String purpose;
   final String notes;
-  final String status;
+  String status;
 
   Item(
       {required this.id,

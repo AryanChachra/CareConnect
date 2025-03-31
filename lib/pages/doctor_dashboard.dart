@@ -27,7 +27,7 @@ class _DoctorDashboardState extends State<DoctorDashboard> {
   }
 
   Future<void> _initializeData() async {
-    String? id = await _storage.read(key: 'UserId');
+    String? id = await _storage.read(key: 'userId');
     loadData(id);
   }
 
@@ -47,37 +47,50 @@ class _DoctorDashboardState extends State<DoctorDashboard> {
     }
   }
 
-  approveAppointment(id) async{
+  Future<bool> approveAppointment(int id) async {
     final data = {'AppointmentId': id};
-    var response = await apiService.postData("generatelink/",data);
-    String meeting = response['meeting_link'];
-    if(meeting != ""){
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text('Appointment Approved')),
-      );
-    }
-    else{
+    try {
+      var response = await apiService.postData("generatelink/", data);
+      String meeting = response['meeting_link'];
+
+      if (meeting.isNotEmpty) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text('Appointment Approved')),
+        );
+        return true;  // Indicating success
+      } else {
+        throw Exception("Invalid meeting link");
+      }
+    } catch (e) {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(content: Text('Error Approving Appointment')),
       );
+      return false;  // Indicating failure
     }
   }
 
-  rejectAppointment(id) async{
+  Future<bool> rejectAppointment(int id) async {
     final data = {'AppointmentId': id};
-    var response = await apiService.postData("Rejectappointment/",data);
-    String meeting = response['meeting_link'];
-    if(meeting != ""){
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text('Appointment Rejected')),
-      );
-    }
-    else{
+    try {
+      var response = await apiService.postData("Rejectappointment/", data);
+      String message = response['message'];
+
+      if (message.isNotEmpty) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text('Appointment Rejected')),
+        );
+        return true;  // Indicating success
+      } else {
+        throw Exception("Invalid rejection message");
+      }
+    } catch (e) {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(content: Text('Error Rejecting Appointment')),
       );
+      return false;  // Indicating failure
     }
   }
+
 
   @override
   Widget build(BuildContext context) {
@@ -132,9 +145,9 @@ class CatalogHeader extends StatelessWidget {
 }
 
 class AppointmentList extends StatelessWidget {
-  final Function(int) approveAppointment;
-  final Function(int) rejectAppointment;
-  const AppointmentList({super.key, required this.approveAppointment, required this.rejectAppointment});
+  final Future<bool> Function(int) approveAppointment;
+  final Future<bool> Function(int) rejectAppointment;
+  const AppointmentList({super.key, required this.approveAppointment, required this.rejectAppointment,});
 
   @override
   Widget build(BuildContext context) {
@@ -143,18 +156,77 @@ class AppointmentList extends StatelessWidget {
       itemCount: AppointmentModel.items.length,
       itemBuilder: (context, index) {
         final catalog = AppointmentModel.items[index];
-        return AppointmentItem(catalog: catalog,approveAppointment: approveAppointment,rejectAppointment: rejectAppointment,);
+        return AppointmentItem(catalog: catalog, approveAppointment: approveAppointment, rejectAppointment: rejectAppointment);
       },
     );
   }
 }
 
-class AppointmentItem extends StatelessWidget {
-  // final List<Item> beds;
+class AppointmentItem extends StatefulWidget {
   final Item catalog;
-  final Function(int) approveAppointment;
-  final Function(int) rejectAppointment;
-  const AppointmentItem({super.key, required this.catalog, required this.approveAppointment, required this.rejectAppointment});
+  final Future<bool> Function(int) approveAppointment;
+  final Future<bool> Function(int) rejectAppointment;
+
+  const AppointmentItem({
+    super.key,
+    required this.catalog,
+    required this.approveAppointment,
+    required this.rejectAppointment,
+  });
+
+  @override
+  _AppointmentItemState createState() => _AppointmentItemState();
+}
+
+class _AppointmentItemState extends State<AppointmentItem> {
+  bool isLoading = false;
+  bool isApproved = false;
+  bool isRejected = false;
+  Color loaderColor = Colors.green;
+
+  void handleApprove() async {
+    setState(() {
+      isLoading = true;
+      isApproved = false;
+      isRejected = false;
+      loaderColor = Colors.green;
+    });
+    var response = await widget.approveAppointment(widget.catalog.id);
+
+    if (response) {
+      setState(() {
+        widget.catalog.status = "Approve";
+        isLoading = false;
+        isApproved = true;
+      });
+    } else {
+      setState(() {
+        isLoading = false;
+      });
+    }
+  }
+
+  void handleReject() async {
+    setState(() {
+      isLoading = true;
+      isApproved = false;
+      isRejected = false;
+      loaderColor = Colors.red;
+    });
+    var response = await widget.rejectAppointment(widget.catalog.id);
+
+    if (response) {
+      setState(() {
+        widget.catalog.status = "Reject";
+        isLoading = false;
+        isRejected = true;
+      });
+    } else {
+      setState(() {
+        isLoading = false;
+      });
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -168,65 +240,53 @@ class AppointmentItem extends StatelessWidget {
         padding: const EdgeInsets.all(16.0),
         child: Row(
           children: [
-            SizedBox(
-              width: 20,
-            ),
+            SizedBox(width: 20),
             Expanded(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
-                mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Padding(
-                    padding: const EdgeInsets.all(16.0),
-                    child: Text(
-                      "Slot Time: ${catalog.bookedSlot}",
-                      style: TextStyle(
-                        color: MyTheme.blueColor,
-                        fontSize: 18,
-                        fontWeight: FontWeight.bold,
-                      ),
+                  Text(
+                    "Slot Time: ${widget.catalog.bookedSlot}",
+                    style: TextStyle(
+                      color: MyTheme.blueColor,
+                      fontSize: 18,
+                      fontWeight: FontWeight.bold,
                     ),
                   ),
-                  SizedBox(
-                    height: 5,
-                  ),
-                  Text(
-                    "Date: ${catalog.appointmentDate}",
-                    style: Theme.of(context).textTheme.bodySmall,
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      ElevatedButton(
-                        onPressed: () => rejectAppointment(catalog.id),
-                        style: ElevatedButton.styleFrom(
-                          backgroundColor:
-                          MyTheme.blueColor, // For button background
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(20),
+                  SizedBox(height: 5),
+                  Text("Date: ${widget.catalog.appointmentDate}"),
+                  Text("Status: ${widget.catalog.status}"),
+                  SizedBox(height: 5),
+                  if (widget.catalog.status == "Pending")
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: [
+                        if (!isLoading)
+                          ElevatedButton(
+                            onPressed: handleReject,
+                            style: ElevatedButton.styleFrom(
+                              backgroundColor: Colors.red,
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(20),
+                              ),
+                            ),
+                            child: Text("Reject", style: TextStyle(color: Colors.white)),
                           ),
-                        ),
-                        child: Text(
-                          "Reject",
-                          style: TextStyle(color: Colors.white),
-                        ),
-                      ),
-                      ElevatedButton(
-                        onPressed: () => approveAppointment(catalog.id),
-                        style: ElevatedButton.styleFrom(
-                          backgroundColor:
-                          MyTheme.blueColor, // For button background
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(20),
+
+                        isLoading
+                            ? CircularProgressIndicator(color: loaderColor)
+                            : ElevatedButton(
+                          onPressed: handleApprove,
+                          style: ElevatedButton.styleFrom(
+                            backgroundColor: Colors.green,
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(20),
+                            ),
                           ),
+                          child: Text("Approve", style: TextStyle(color: Colors.white)),
                         ),
-                        child: Text(
-                          "Approve",
-                          style: TextStyle(color: Colors.white),
-                        ),
-                      ),
-                    ],
-                  ),
+                      ],
+                    ),
                 ],
               ),
             ),

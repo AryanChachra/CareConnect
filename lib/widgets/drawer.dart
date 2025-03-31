@@ -50,6 +50,7 @@ class _MyDrawerState extends State<MyDrawer> {
     await _storage.delete(key: 'auth_token');
     await _storage.delete(key: 'userType');
     await _storage.delete(key: 'otp');
+    await _storage.delete(key: 'UserId');
     Navigator.pushNamedAndRemoveUntil(context, MyRoutes.landingRoute, (route) => false);
 }
 

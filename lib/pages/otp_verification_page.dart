@@ -1,4 +1,5 @@
 import 'package:CareConnect/services/api_service.dart';
+import 'package:CareConnect/widgets/appbar.dart';
 import 'package:flutter/material.dart';
 import 'package:CareConnect/widgets/themes.dart';
 import 'package:CareConnect/utils/routes.dart';
@@ -86,10 +87,7 @@ class _OTPVerificationPageState extends State<OTPVerificationPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text("OTP Verification"),
-        backgroundColor: MyTheme.blueColor,
-      ),
+      appBar: CustomAppBar(),
       body: Padding(
         padding: EdgeInsets.all(20.0),
         child: Column(

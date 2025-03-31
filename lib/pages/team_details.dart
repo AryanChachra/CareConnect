@@ -31,8 +31,6 @@ class TeamDetailsPage extends StatelessWidget {
               height: 18,
               thickness: 5,
             ),
-
-            // Team members
             const Text(
               'Members',
               style: TextStyle(
@@ -169,7 +167,7 @@ class MemberDetailsPage extends StatelessWidget {
               decoration: BoxDecoration(
                 image: DecorationImage(
                   image: AssetImage(member.photoPath),
-                  fit: BoxFit.cover,
+                  fit: BoxFit.contain,
                 ),
               ),
             ),
@@ -194,9 +192,13 @@ class MemberDetailsPage extends StatelessWidget {
                         'Role: ${member.role}',
                         style: TextStyle(fontSize: 22, color: Colors.white),
                       ),
-                      Text(
-                        member.desc,
-                        style: TextStyle(fontSize: 18, color: Colors.white),
+                      Padding(
+                        padding: const EdgeInsets.all(16.0),
+                        child: Text(
+                          member.desc,
+                          textAlign: TextAlign.center,
+                          style: TextStyle(fontSize: 18, color: Colors.white),
+                        ),
                       ),
                     ],
                   ),
