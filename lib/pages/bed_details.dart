@@ -28,7 +28,8 @@ class _BedDetailsState extends State<BedDetails> {
   }
 
   loadData(id) async {
-    final data = {'HospitalId': id};
+    final data = {'HospitalId': id.toString()};
+    print(data);
     try {
       var bedData = await apiService.postData("viewBedByHospital/", data);
       BedModel.items =

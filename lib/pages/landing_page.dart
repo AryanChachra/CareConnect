@@ -34,9 +34,9 @@ class _LandingPageState extends State<LandingPage> {
   }
   @override
   Widget build(BuildContext context) {
-    return SingleChildScrollView(
-      child: Scaffold(
-        body: Column(
+    return Scaffold(
+      body: SingleChildScrollView(
+        child: Column(
           children: [
             Stack(
               children: [

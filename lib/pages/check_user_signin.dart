@@ -13,9 +13,9 @@ class CheckUserSignIn extends StatefulWidget {
 class _CheckUserSignInState extends State<CheckUserSignIn> {
   @override
   Widget build(BuildContext context) {
-    return SingleChildScrollView(
-      child: Scaffold(
-        body: Column(
+    return Scaffold(
+      body: SingleChildScrollView(
+        child: Column(
           children: [
             Stack(
               children: [
