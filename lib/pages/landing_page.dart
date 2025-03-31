@@ -34,116 +34,118 @@ class _LandingPageState extends State<LandingPage> {
   }
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Column(
-        children: [
-          Stack(
-            children: [
-              ClipPath(
-                clipper: BottomArcClipper(height: 30),
-                child: Container(
-                  height: 400,
-                  color: MyTheme.blueColor,
-                ),
-              ),
-              Positioned(
-                top: 100,
-                left: 20,
-                right: 20,
-                child: Image.asset(
-                  'assets/images/loginImgbg.png',
-                  height: 200,
-                  fit: BoxFit.cover,
-                ),
-              ),
-            ],
-          ),
-          SizedBox(
-            height: 30,
-          ),
-          Column(
-            children: [
-              SizedBox(
-                  height: 100,
-                  width: 350,
-                  child: Image(
-                      image: AssetImage('assets/images/CareConnect.png'))),
-              SizedBox(
-                height: 25,
-              ),
-              ElevatedButton(
-                onPressed: () {
-                  Navigator.pushNamed(context, MyRoutes.checkuserRoute);
-                },
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: MyTheme.blueColor, // Button color
-                  foregroundColor: Colors.white, // Text color
-                  padding:
-                      EdgeInsets.symmetric(vertical: 12, horizontal: 24),
-                  shape: RoundedRectangleBorder(
-                    borderRadius:
-                        BorderRadius.circular(8.0), // Rounded corners
+    return SingleChildScrollView(
+      child: Scaffold(
+        body: Column(
+          children: [
+            Stack(
+              children: [
+                ClipPath(
+                  clipper: BottomArcClipper(height: 30),
+                  child: Container(
+                    height: 400,
+                    color: MyTheme.blueColor,
                   ),
-                  elevation: 5, // Shadow
                 ),
-                child: Row(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    Icon(Icons.app_registration, size: 20,color: Colors.white,), // Add an email icon
-                    SizedBox(width: 8),
-                    Text(
-                      "Sign Up",
-                      style: TextStyle(
-                          fontSize: 16, fontWeight: FontWeight.bold),
-                    ),
-                  ],
-                ),
-              ),
-              SizedBox(
-                height: 15,
-              ),
-              ElevatedButton(
-                onPressed: () {
-                  Navigator.pushNamed(context, MyRoutes.checkusersigninRoute);
-                },
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: Colors.white, // Button color
-                  foregroundColor: MyTheme.blueColor, // Text color
-                  padding:
-                  EdgeInsets.symmetric(vertical: 12, horizontal: 24),
-                  shape: RoundedRectangleBorder(
-                    borderRadius:
-                    BorderRadius.circular(8.0), // Rounded corners
+                Positioned(
+                  top: 100,
+                  left: 20,
+                  right: 20,
+                  child: Image.asset(
+                    'assets/images/loginImgbg.png',
+                    height: 200,
+                    fit: BoxFit.cover,
                   ),
-                  elevation: 5, // Shadow
                 ),
-                child: Row(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    Icon(Icons.login, size: 20,color: MyTheme.blueColor,), // Add an email icon
-                    SizedBox(width: 8),
-                    Text(
-                      "Sign In",
-                      style: TextStyle(
-                          fontSize: 16, fontWeight: FontWeight.bold),
+              ],
+            ),
+            SizedBox(
+              height: 30,
+            ),
+            Column(
+              children: [
+                SizedBox(
+                    height: 100,
+                    width: 350,
+                    child: Image(
+                        image: AssetImage('assets/images/CareConnect.png'))),
+                SizedBox(
+                  height: 25,
+                ),
+                ElevatedButton(
+                  onPressed: () {
+                    Navigator.pushNamed(context, MyRoutes.checkuserRoute);
+                  },
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: MyTheme.blueColor, // Button color
+                    foregroundColor: Colors.white, // Text color
+                    padding:
+                        EdgeInsets.symmetric(vertical: 12, horizontal: 24),
+                    shape: RoundedRectangleBorder(
+                      borderRadius:
+                          BorderRadius.circular(8.0), // Rounded corners
                     ),
-                  ],
+                    elevation: 5, // Shadow
+                  ),
+                  child: Row(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      Icon(Icons.app_registration, size: 20,color: Colors.white,), // Add an email icon
+                      SizedBox(width: 8),
+                      Text(
+                        "Sign Up",
+                        style: TextStyle(
+                            fontSize: 16, fontWeight: FontWeight.bold),
+                      ),
+                    ],
+                  ),
                 ),
-              ),
-              SizedBox(
-                height: 15,
-              ),
-              Text(
-                "By signing in you are agreeing to our",
-                style: TextStyle(color: Colors.grey.shade800),
-              ),
-              Text(
-                "Terms and Conditions",
-                style: TextStyle(color: Colors.grey.shade800),
-              ),
-            ],
-          ),
-        ],
+                SizedBox(
+                  height: 15,
+                ),
+                ElevatedButton(
+                  onPressed: () {
+                    Navigator.pushNamed(context, MyRoutes.checkusersigninRoute);
+                  },
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: Colors.white, // Button color
+                    foregroundColor: MyTheme.blueColor, // Text color
+                    padding:
+                    EdgeInsets.symmetric(vertical: 12, horizontal: 24),
+                    shape: RoundedRectangleBorder(
+                      borderRadius:
+                      BorderRadius.circular(8.0), // Rounded corners
+                    ),
+                    elevation: 5, // Shadow
+                  ),
+                  child: Row(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      Icon(Icons.login, size: 20,color: MyTheme.blueColor,), // Add an email icon
+                      SizedBox(width: 8),
+                      Text(
+                        "Sign In",
+                        style: TextStyle(
+                            fontSize: 16, fontWeight: FontWeight.bold),
+                      ),
+                    ],
+                  ),
+                ),
+                SizedBox(
+                  height: 15,
+                ),
+                Text(
+                  "By signing in you are agreeing to our",
+                  style: TextStyle(color: Colors.grey.shade800),
+                ),
+                Text(
+                  "Terms and Conditions",
+                  style: TextStyle(color: Colors.grey.shade800),
+                ),
+              ],
+            ),
+          ],
+        ),
       ),
     );
   }
