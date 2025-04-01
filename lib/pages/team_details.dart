@@ -138,12 +138,12 @@ final team = Team(
         name: 'Gaurav Kadskar',
         role: 'Backend Developer',
         photoPath: 'assets/images/gaurav.jpg',
-        desc: 'Django Developer, I build APIs '),
+        desc: 'I am a skilled developer with expertise in PHP, Django, and Moqui. I have a strong background in AI/ML and warehouse management systems, with hands-on experience in NiFi, OFBiz, and database optimizations. I am a passionate about problem-solving, continuously exploring new technologies and best practices.'),
     TeamMember(
         name: 'Kunal Bamoriya',
         role: 'Frontend Developer',
         photoPath: 'assets/images/kunal.jpg',
-        desc: 'Frontend Developer, My Tech Stack Includes Java, MERN, Springboot.'),
+        desc: 'I’m a versatile Front-End Developer skilled in building dynamic MERN stack websites and Java applications. A strong team player, I create seamless user experiences with clean, efficient code while staying ahead of industry trends.'),
   ],
 );
 

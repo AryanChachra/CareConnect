@@ -49,6 +49,7 @@ class AppointmentViewingState extends State<AppointmentViewing> {
     if (pickedDate != null) {
       setState(() {
         _selectedDate = DateFormat('yyyy-MM-dd').format(pickedDate);
+        // SlotModel.items.clear();
       });
     }
   }
@@ -105,10 +106,10 @@ class AppointmentViewingState extends State<AppointmentViewing> {
 
             // Date Picker
             Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
                 Text(
-                  "Selected Date: $_selectedDate",
+                  "Date: $_selectedDate",
                   style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
                 ),
                 ElevatedButton(
@@ -162,7 +163,8 @@ class AppointmentViewingState extends State<AppointmentViewing> {
 
             SlotModel.items.isEmpty
                 ? Center(child: Text("No slots available for this date."))
-                : Expanded(
+                :
+            Expanded(
                     child: ListView.builder(
                       itemCount: SlotModel.items.length,
                       itemBuilder: (context, index) {
