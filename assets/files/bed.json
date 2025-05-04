@@ -1,40 +1,56 @@
-{
-  "Beds": [
-    {
-      "id": 1,
-      "name": "Arihant Hospital & Research Centre",
-      "type": "ICU",
-      "number": "324"
-    },
-    {
-      "id": 2,
-      "name": "Medicare Hospital & Research Centre",
-      "type": "Semi Private",
-      "number": "411"
-    },
-    {
-      "id": 3,
-      "name": "Apollo Hospital",
-      "type": "Private",
-      "number": "212"
-    },
-    {
-      "id": 4,
-      "name": "Apple Hospital",
-      "type": "Semi Private",
-      "number": "344"
-    },
-    {
-      "id": 5,
-      "name": "Index Medical College Hospital & Research Centre",
-      "type": "General",
-      "number": "504"
-    },
-    {
-      "id": 6,
-      "name": "Medanta Super Speciality Hospital",
-      "type": "Neonatal",
-      "number": "067"
-    }
-  ]
-}
+[
+  {
+    "id": 1,
+    "Hospital_name": "Arihant Hospital & Research Centre",
+    "Hospital_id": "AHRC",
+    "Bed_id": "AHRCB1",
+    "Ward_number": "AHRCW1",
+    "Room_number": "AHRCR1",
+    "Bed_type": "ICU"
+  },
+  {
+    "id": 2,
+    "Hospital_name": "Medicare Hospital & Research Centre",
+    "Hospital_id": "MHRC",
+    "Bed_id": "MHRCB1",
+    "Ward_number": "MHRCW1",
+    "Room_number": "MHRCR1",
+    "Bed_type": "Semi Private"
+  },
+  {
+    "id": 3,
+    "Hospital_name": "Apollo Hospital",
+    "Hospital_id": "APPH",
+    "Bed_id": "APPHB1",
+    "Ward_number": "APPHW1",
+    "Room_number": "APPHR1",
+    "Bed_type": "Private"
+  },
+  {
+    "id": 4,
+    "Hospital_name": "Apple Hostpital",
+    "Hospital_id": "APLH",
+    "Bed_id": "APLHB1",
+    "Ward_number": "APLHW1",
+    "Room_number": "APLHR1",
+    "Bed_type": "Semi Private"
+  },
+  {
+    "id": 5,
+    "Hospital_name": "Index Medical College Hospital & Research Centre",
+    "Hospital_id": "IMCHRC",
+    "Bed_id": "IMCHRCB1",
+    "Ward_number": "IMCHRCW1",
+    "Room_number": "IMCHRCR1",
+    "Bed_type": "General"
+  },
+  {
+    "id": 6,
+    "Hospital_name": "Medanta Super Speciality Hospital",
+    "Hospital_id": "MSSH",
+    "Bed_id": "MSSHB1",
+    "Ward_number": "MSSHW1",
+    "Room_number": "MSSHR1",
+    "Bed_type": "Neonatal"
+  }
+]

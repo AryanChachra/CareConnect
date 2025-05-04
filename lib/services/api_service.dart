@@ -3,7 +3,7 @@ import 'package:http/http.dart' as http;
 
 
 class ApiService{
-  final String baseUrl = 'https://careconnect-web-alnz.onrender.com';
+  final String baseUrl = 'https://majorapi.onrender.com';
 
   Future<dynamic> getData(String endpoint) async{
     final response = await http.get(Uri.parse('$baseUrl/$endpoint'));

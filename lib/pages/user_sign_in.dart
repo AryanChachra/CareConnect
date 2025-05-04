@@ -120,7 +120,7 @@ class _SignInState extends State<SignIn> {
       body: Padding(
         padding: EdgeInsets.all(16.0),
         child: Center(
-          child: Container(
+          child: SizedBox(
             height: 400,
             width: 400,
             child: Card(

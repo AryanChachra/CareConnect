@@ -98,8 +98,8 @@ class _MyDrawerState extends State<MyDrawer> {
                   height: 30,
                   thickness: 3,
                   color: MyTheme.blueColor,
-
                 ),
+                SizedBox(height: 20,),
               ],
             ),
           ),
